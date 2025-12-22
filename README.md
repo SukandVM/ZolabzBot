@@ -1,6 +1,6 @@
-# AI Interview Bot Backend — Team Onboarding & Setup Guide
+# AI Interview Bot Backend - OpenCV Development Pipeline
 
-Welcome to the **AI Interview Bot Backend** project! This document will help every team member set up the development environment, follow the collaboration workflow, and start contributing immediately.
+Welcome to the **AI Interview Bot Backend** OpenCV Development pipeline! This document will guide new users on how to install and run this bot locally step by step.
 
 ---
 
@@ -9,7 +9,7 @@ Welcome to the **AI Interview Bot Backend** project! This document will help eve
 Before starting, ensure you have installed:
 
 ### Required:
-- **Python 3.10** (not 3.11/3.12)
+- **Python 3.12.3** (or 3.10 doesn't matter)
 - **Git**
 - **VS Code / PyCharm** (recommended)
 - **Virtual environment** (venv) enabled
@@ -92,45 +92,12 @@ uvicorn app.main:app --reload
 
 ### Test in browser:
 - http://127.0.0.1:8000/
-- http://127.0.0.1:8000/v1/interview/health
+- http://127.0.0.1:8000/v1/interview/opencv
 
 ✅ **If both respond correctly, setup is successful.**
 
 ---
 
-## 8. Create Your Feature Branch
-
-Each team member works on their own module.
-
-### Examples:
-
-**Computer Vision:**
-```bash
-git checkout -b feature/cv-module
-git push -u origin feature/cv-module
-```
-
-**LLM Module:**
-```bash
-git checkout -b feature/llm-module
-git push -u origin feature/llm-module
-```
-
-**Resume Parser:**
-```bash
-git checkout -b feature/resume-parser
-git push -u origin feature/resume-parser
-```
-
-**Integrator:**
-```bash
-git checkout -b feature/integration
-git push -u origin feature/integration
-```
-
----
-
-## 9. Daily Team Workflow
 
 ### 1. Pull latest `develop`
 ```bash
