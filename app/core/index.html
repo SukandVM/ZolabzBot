@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <title>Face Detection + Speech Recognition</title>
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+            .video-container {
+                max-width: 640px;
+                margin: 0 auto;
+                background: #000;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            #video, #canvas {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            #camera-select {
+                flex: 1;
+                padding: 0.375rem 0.75rem;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem 0 0 0.25rem;
+            }
+            .status-indicator {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin-right: 8px;
+            }
+            .status-disconnected {
+                background-color: #dc3545;
+            }
+            .status-connected {
+                background-color: #28a745;
+            }
+            #status-text {
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+            .btn-stop {
+                display: none;
+            }
+            .transcription-box {
+                min-height: 150px;
+                max-height: 300px;
+                overflow-y: auto;
+                background: white;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                padding: 15px;
+                margin-top: 20px;
+            }
+            .transcription-item {
+                margin-bottom: 10px;
+                padding: 8px;
+                background: #f8f9fa;
+                border-radius: 4px;
+            }
+            .transcription-text {
+                font-size: 1.1rem;
+                color: #212529;
+            }
+            .transcription-time {
+                font-size: 0.85rem;
+                color: #6c757d;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container py-4">
+            <h1 class="my-3">Face Detection + Speech Recognition</h1>
+            <p class="text-muted">Real-time face detection with Whisper speech transcription</p>
+            
+            <form id="form-connect" class="mb-3">
+                <div class="input-group mb-2">
+                    <select id="camera-select" class="form-select" required>
+                        <option value="">Select a camera...</option>
+                    </select>
+                    <button class="btn btn-success" type="submit" id="button-start">
+                        <span>▶ Start</span>
+                    </button>
+                    <button class="btn btn-danger btn-stop" type="button" id="button-stop">
+                        <span>⏹ Stop</span>
+                    </button>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="enable-speech" checked>
+                    <label class="form-check-label" for="enable-speech">
+                        Enable Speech Recognition
+                    </label>
+                </div>
+            </form>
+
+            <div class="mb-3">
+                <div>
+                    <span class="status-indicator status-disconnected" id="status-indicator-video"></span>
+                    <span id="status-text-video">Video: Disconnected</span>
+                </div>
+                <div>
+                    <span class="status-indicator status-disconnected" id="status-indicator-audio"></span>
+                    <span id="status-text-audio">Audio: Disconnected</span>
+                </div>
+            </div>
+            
+            <div class="video-container position-relative">
+                <video id="video" autoplay playsinline muted></video>
+                <canvas id="canvas" class="position-absolute top-0 start-0"></canvas>
+            </div>
+
+            <div class="transcription-box" id="transcription-box">
+                <h5>Transcriptions</h5>
+                <div id="transcriptions">
+                    <p class="text-muted">No transcriptions yet...</p>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <small class="text-muted">
+                    <strong>Note:</strong> Make sure the backend server is running on <code>http://localhost:8000</code>
+                </small>
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+    </body>
+</html>
