@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.routes.interview import router as interview_router
+from app.api.v1.routes.llm import router as llm_router
 
 
 app = FastAPI(title="AI Interview Bot Backend", version="0.1.0")
@@ -20,3 +21,4 @@ def root():
 
 
 app.include_router(interview_router)
+app.include_router(llm_router)
