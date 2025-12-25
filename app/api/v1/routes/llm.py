@@ -1,11 +1,12 @@
+# app/api/v1/routes/llm.py
 from fastapi import APIRouter, HTTPException
+from app.services.llm_service import generate_question, score_answer
 from app.models.llm import (
     QuestionRequest,
     QuestionResponse,
     ScoreRequest,
     ScoreResponse,
 )
-from app.services.llm_service import generate_question, score_answer
 
 router = APIRouter(prefix="/v1/llm", tags=["LLM"])
 
