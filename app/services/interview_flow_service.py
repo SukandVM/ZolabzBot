@@ -1,4 +1,5 @@
 from typing import Dict, List
+from app.core.logging import logger
 from app.services.llm_service import generate_question, score_answer
 
 # In-memory session store (later Redis / DB)
@@ -6,12 +7,17 @@ INTERVIEW_SESSIONS: Dict[str, Dict] = {}
 
 
 async def start_interview(candidate_id: str, skills: List[str]):
+    if not skills:
+        raise ValueError("No skills provided for interview")
+
     INTERVIEW_SESSIONS[candidate_id] = {
         "current_index": 0,
         "skills": skills,
         "results": [],
         "status": "IN_PROGRESS",
     }
+
+    logger.info(f"Starting interview for {candidate_id}, skills={skills}")
 
 
 async def get_next_question(candidate_id: str):
