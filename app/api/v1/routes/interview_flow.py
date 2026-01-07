@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.core.logging import logger
-
 from app.services.resume_storage_service import get_resume
 from app.services.interview_flow_service import (
+    INTERVIEW_SESSIONS,
     start_interview,
     get_next_question,
     submit_answer,
@@ -96,3 +96,28 @@ async def interview_report(candidate_id: str):
         raise HTTPException(status_code=400, detail="Interview not completed yet")
 
     return generate_interview_report(candidate_id, interview_state)
+
+
+@router.get("/debug/{candidate_id}")
+async def debug_session(candidate_id: str):
+    session = INTERVIEW_SESSIONS.get(candidate_id)
+
+    if not session:
+        return {"candidate_id": candidate_id, "exists": False}
+
+    return {"candidate_id": candidate_id, "exists": True, "session": session}
+
+
+@router.delete("/reset/{candidate_id}")
+async def reset_session(candidate_id: str):
+    if candidate_id in INTERVIEW_SESSIONS:
+        del INTERVIEW_SESSIONS[candidate_id]
+
+    return {"candidate_id": candidate_id, "reset": True}
+
+
+@router.delete("/reset-all")
+async def reset_all_sessions():
+    INTERVIEW_SESSIONS.clear()
+
+    return {"reset_all": True}
