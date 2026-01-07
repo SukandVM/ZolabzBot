@@ -1,8 +1,19 @@
-def speech_to_text(audio_path: str) -> str:
+def transcribe_audio(audio_path: str) -> dict:
     """
+    ASR Core Contract (FROZEN)
+
     Input:
-        audio_path: path to recorded audio
+        audio_path (str): path to audio file (wav/mp3)
+
     Output:
-        transcribed text
+        {
+            "transcript": str,
+            "confidence": float | None
+        }
     """
-    raise NotImplementedError("ASR module not integrated yet")
+
+    # TEMPORARY MOCK (for backend testing)
+    return {
+        "transcript": "This is a mocked ASR transcription for testing.",
+        "confidence": 0.9,
+    }
