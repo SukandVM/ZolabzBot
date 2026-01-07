@@ -1,9 +1,17 @@
-def check_violation(frame_data) -> bool:
+def analyze_frame(frame_path: str) -> dict:
     """
+    CV Core Contract (FROZEN)
+
     Input:
-        frame_data: camera frame / stream info
+        frame_path (str): image/frame path
+
     Output:
-        True  -> violation detected
-        False -> no issue
+        {
+            "violation": bool,
+            "violation_type": str | None,
+            "confidence": float | None
+        }
     """
-    return False  # default safe behavior
+
+    # TEMPORARY MOCK
+    return {"violation": False, "violation_type": None, "confidence": 0.0}
