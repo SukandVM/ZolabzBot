@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import List
+
+# from typing import List
 
 
 class StartInterviewRequest(BaseModel):
     candidate_id: str
-    skills: List[str]
 
 
 class StartInterviewResponse(BaseModel):
