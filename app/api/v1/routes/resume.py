@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from app.services.resume_parser_service import parse_resume_text
 from app.services.resume_storage_service import store_resume
+from app.utils.pdf_text_extractor import extract_text_from_pdf
 from app.core.logging import logger
 import tempfile
 import os
@@ -23,7 +24,8 @@ async def upload_resume(
 
     try:
         # For now, treat PDF as text (later replace with proper PDF extraction)
-        text = content.decode(errors="ignore")
+        text = extract_text_from_pdf(tmp_path)
+        logger.info(text[:500])
 
         parsed_resume = parse_resume_text(text)
 
