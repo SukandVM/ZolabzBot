@@ -119,7 +119,7 @@ typer-slim==0.20.0
 typing_extensions==4.15.0
 urllib3==2.3.0
 uvicorn==0.30.1
-uvloop==0.22.1
+
 virtualenv==20.35.4
 wasabi==1.1.3
 watchfiles==1.1.1
