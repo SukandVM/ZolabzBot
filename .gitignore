@@ -144,6 +144,7 @@ ENV/
 env.bak/
 venv.bak/
 llama.cpp/
+.env
 
 # Spyder project settings
 .spyderproject
